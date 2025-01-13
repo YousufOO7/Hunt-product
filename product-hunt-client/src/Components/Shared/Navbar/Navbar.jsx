@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 // import navLogo from '../../../../public/images/navLogo.jpeg'
 import navLogo from '../../../../public/images/navLogo2.png'
 
@@ -38,7 +38,7 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-center'>
                     <img src={navLogo} className='w-16 h-16' alt="" />
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <a className="btn btn-ghost text-xl">TrendTracker</a>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -50,7 +50,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <div className='flex gap-2'>
-                    <button className='btn'>Login</button>
+                    <Link to='login'><button className='btn'>Login</button></Link>
                     <button className='btn'>Register</button>
                 </div>
                 <div className="dropdown dropdown-end">
