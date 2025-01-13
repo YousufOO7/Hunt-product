@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-// import navLogo from '../../../../public/images/navLogo.jpeg'
 import navLogo from '../../../../public/images/navLogo2.png'
 import useAuth from '../../../Hooks/useAuth';
 
@@ -12,7 +11,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar bg-gray-300 lg:px-24 px-5">
+        <div className="navbar fixed  bg-green-300 lg:px-24 px-5">
             <div className="navbar-start">
                 <div className='dropdown'>
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,7 +51,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 <div className='flex gap-2'>
                     <Link to='login'><button className='btn'>Login</button></Link>
-                    <button className='btn'>Register</button>
+                    <Link to='register'><button className='btn'>Register</button></Link>
                 </div>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
