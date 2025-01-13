@@ -2,9 +2,10 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 // import navLogo from '../../../../public/images/navLogo.jpeg'
 import navLogo from '../../../../public/images/navLogo2.png'
+import useAuth from '../../../Hooks/useAuth';
 
 const Navbar = () => {
-
+    const { user, Logout } = useAuth();
     const Links = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><a>Products</a></li>
@@ -56,9 +57,14 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                            {
+                                user && user?.email ? <img
+                                    alt="Tailwind CSS Navbar component"
+                                    src={user.photoURL} referrerPolicy='no-referrer' /> :
+                                    <img
+                                        alt="Tailwind CSS Navbar component"
+                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                            }
                         </div>
                     </div>
                     <ul
@@ -70,7 +76,7 @@ const Navbar = () => {
                             </a>
                         </li>
                         <li><a>Dashboard</a></li>
-                        <li><a>Logout</a></li>
+                        <li onClick={Logout} ><a>Logout</a></li>
                     </ul>
                 </div>
             </div>
