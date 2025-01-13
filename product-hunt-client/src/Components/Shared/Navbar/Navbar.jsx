@@ -7,11 +7,11 @@ const Navbar = () => {
     const { user, Logout } = useAuth();
     const Links = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><a>Products</a></li>
+        <li><NavLink to="/products">Products</NavLink></li>
     </>
 
     return (
-        <div className="navbar fixed  bg-green-300 lg:px-24 px-5">
+        <div className="navbar fixed bg-green-300 z-10 lg:px-24 px-5">
             <div className="navbar-start">
                 <div className='dropdown'>
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
