@@ -3,6 +3,7 @@ import { FaVoteYea } from "react-icons/fa";
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import useAuth from '../../../Hooks/useAuth';
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom';
 
 const AllProductsCard = ({ product, refetch }) => {
     const { user } = useAuth();
@@ -47,7 +48,9 @@ const AllProductsCard = ({ product, refetch }) => {
                 <img src={image} className='bg-cover w-full h-[200px] group-hover:scale-110 transition-transform duration-700' alt={name} />
             </figure>
             <div className="card-body">
-                <h2 className="card-title">{name}</h2>
+                <Link to={`/product/${_id}`}>
+                    <h2 className="card-title">{name}</h2>
+                </Link>
                 <div className='space-x-2'>
                     {tags.map((tag, idx) => (
                         <span key={idx} className='badge badge-secondary'>
