@@ -3,12 +3,15 @@ import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import ReviewSectionCard from "../ReviewSectionCard/ReviewSectionCard";
+import useProducts from "../../../Hooks/useProducts";
 
 
 const ProductDetails = () => {
     const { user } = useAuth();
     const axiosPublic = useAxiosPublic();
     const product = useLoaderData();
+    const [refetch] = useProducts()
     // console.log(product)
     const { name, image, tags, upvoteCount, _id, description, externalLinks } = product;
 
@@ -22,7 +25,6 @@ const ProductDetails = () => {
 
             // Check if the vote was successful
             if (res.data.success) {
-                refetch()
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -30,6 +32,7 @@ const ProductDetails = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                refetch();
             } else {
                 Swal.fire({
                     position: "center",
@@ -89,7 +92,8 @@ const ProductDetails = () => {
                 </div>
             </div>
 
-            <h2 className="text-center">this is a review section</h2>
+
+            <ReviewSectionCard product={product}></ReviewSectionCard>
         </div >
     );
 };

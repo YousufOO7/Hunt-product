@@ -19,7 +19,6 @@ const AllProductsCard = ({ product, refetch }) => {
 
             // Check if the vote was successful
             if (res.data.success) {
-                refetch()
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -27,6 +26,7 @@ const AllProductsCard = ({ product, refetch }) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                refetch()
             } else {
                 Swal.fire({
                     position: "center",
