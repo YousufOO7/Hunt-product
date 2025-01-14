@@ -3,7 +3,7 @@ import useProducts from "../../../Hooks/useProducts";
 
 
 const Products = () => {
-    const [products] = useProducts();
+    const [products, refetch] = useProducts();
 
 
     return (
@@ -13,7 +13,7 @@ const Products = () => {
 
                 <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5">
                     {
-                        products.map(product => <AllProductsCard key={product._id} product={product}></AllProductsCard>)
+                        products.map(product => <AllProductsCard refetch={refetch} key={product._id} product={product}></AllProductsCard>)
                     }
                 </section>
             </div>
