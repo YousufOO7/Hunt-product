@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { useState } from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 
 const ReviewForm = () => {
@@ -16,7 +17,7 @@ const ReviewForm = () => {
 
     const handleGivenReview = async (e) => {
         e.preventDefault();
-        const review = {
+        const reviewData = {
             userName: user?.displayName,
             userPhoto: user?.photoURL,
             userEmail: user?.email,
@@ -26,9 +27,19 @@ const ReviewForm = () => {
         }
 
         // send to database the review
-        const res = await axiosPublic.post('/reviews', review)
-        if(res.data.insertedId){
-            console.log(res.data)
+        const res = await axiosPublic.post('/products/reviews', reviewData);
+
+        if (res.data.success) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: `Review added successfully!`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            console.log(res.data);
+        } else {
+            console.log("Error adding review. Please try again later.");
         }
     }
 
@@ -61,7 +72,7 @@ const ReviewForm = () => {
                                         Description
                                     </label>
                                     <textarea
-                                    name="comment"
+                                        name="comment"
                                         className="textarea textarea-bordered w-full mt-2"
                                         onBlur={(e) => setComment(e.target.value)}
                                         required

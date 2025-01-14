@@ -41,7 +41,6 @@ const ProductDetails = () => {
             }
         } catch (error) {
             console.error('Error submitting vote:', error);
-            alert('An error occurred while voting. Please try again.');
         }
     };
 
