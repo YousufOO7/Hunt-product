@@ -8,6 +8,8 @@ import Register from "../../Social/Register";
 import Products from "../Pages/Products/Products";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import ReviewForm from "../Pages/ReviewForm/ReviewForm";
+import Dashboard from "../MainLayOut/Dashboard";
+import MyProfile from "../Dashboard/MyProfile/MyProfile";
 
  const router = createBrowserRouter([
     {
@@ -32,6 +34,21 @@ import ReviewForm from "../Pages/ReviewForm/ReviewForm";
                 path: "/review/:id",
                 element: <ReviewForm></ReviewForm>,
                 loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
+            },
+        ],
+        
+        
+    },
+
+    // dashboard
+    {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+        children: [
+            // user
+            {
+                path: 'my-profile',
+                element: <MyProfile></MyProfile>
             }
         ]
     },
