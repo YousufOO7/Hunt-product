@@ -10,6 +10,7 @@ import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import ReviewForm from "../Pages/ReviewForm/ReviewForm";
 import Dashboard from "../MainLayOut/Dashboard";
 import MyProfile from "../Dashboard/MyProfile/MyProfile";
+import AddProduct from "../Dashboard/AddProduct/AddProduct";
 
  const router = createBrowserRouter([
     {
@@ -45,11 +46,15 @@ import MyProfile from "../Dashboard/MyProfile/MyProfile";
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
         children: [
-            // user
+            // user dashboard
             {
                 path: 'my-profile',
                 element: <MyProfile></MyProfile>
-            }
+            },
+            {
+                path: 'add-product',
+                element: <AddProduct></AddProduct>
+            },
         ]
     },
     {
