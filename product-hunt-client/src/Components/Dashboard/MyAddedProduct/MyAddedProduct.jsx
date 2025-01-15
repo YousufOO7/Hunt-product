@@ -2,6 +2,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import useAddProduct from "../../../Hooks/useAddProduct";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 
 const MyAddedProduct = () => {
@@ -45,67 +46,69 @@ const MyAddedProduct = () => {
 
             {
                 addedProduct.length > 0 ? <div className="flex flex-col mt-6 pb-5">
-                <div className="md:-mx-4 md:-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block  min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div className="overflow-hidden border  border-gray-200 md:rounded-lg">
-                            <table className="min-w-full divide-y  divide-gray-200">
-                                <thead className="bg-gray-50 ">
-                                    <tr>
-                                        <th className="py-3.5 px-4 text-sm font-normal text-left">
-                                            #
-                                        </th>
-                                        <th className="py-3.5 px-4 text-sm font-normal text-left">
-                                            Product Name
-                                        </th>
-                                        <th className="py-3.5 px-4 text-sm font-normal text-left">
-                                            Number of Vote
-                                        </th>
-                                        <th className="px-4 py-3.5 text-sm font-normal text-left">
-                                            Status
-                                        </th>
-                                        <th className="px-4 py-3.5 text-sm font-normal text-left">
-                                            Action
-                                        </th>
-                                        <th className="px-4 py-3.5 text-sm font-normal text-left">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody className="bg-white divide-y divide-gray-200 ">
-                                    {addedProduct.map((product, idx) => (
-                                        <tr key={product._id}>
-                                            <td className="px-4 py-4 ">
-                                                {idx + 1}
-                                            </td>
-                                            <td className="px-4 py-4 text-sm">
-                                                {product.productName}
-                                            </td>
-                                            <td className="px-4 py-4 text-sm ">
-                                                {0}
-                                            </td>
-                                            <td className="px-4 py-4 text-sm">
-                                                Pending
-                                            </td>
-                                            <td className="px-4 py-4 text-sm">
-                                                <button className="btn">Update</button>
-                                            </td>
-                                            <td className="px-4 py-4 text-sm">
-                                                <button
-                                                    onClick={() => handleDeleteProduct(product._id)}
-                                                    className="btn">Delete</button>
-                                            </td>
+                    <div className="md:-mx-4 md:-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="inline-block  min-w-full py-2 align-middle md:px-6 lg:px-8">
+                            <div className="overflow-hidden border  border-gray-200 md:rounded-lg">
+                                <table className="min-w-full divide-y  divide-gray-200">
+                                    <thead className="bg-gray-50 ">
+                                        <tr>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left">
+                                                #
+                                            </th>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left">
+                                                Product Name
+                                            </th>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left">
+                                                Number of Vote
+                                            </th>
+                                            <th className="px-4 py-3.5 text-sm font-normal text-left">
+                                                Status
+                                            </th>
+                                            <th className="px-4 py-3.5 text-sm font-normal text-left">
+                                                Action
+                                            </th>
+                                            <th className="px-4 py-3.5 text-sm font-normal text-left">
+                                                Action
+                                            </th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody className="bg-white divide-y divide-gray-200 ">
+                                        {addedProduct.map((product, idx) => (
+                                            <tr key={product._id}>
+                                                <td className="px-4 py-4 ">
+                                                    {idx + 1}
+                                                </td>
+                                                <td className="px-4 py-4 text-sm">
+                                                    {product.productName}
+                                                </td>
+                                                <td className="px-4 py-4 text-sm ">
+                                                    {0}
+                                                </td>
+                                                <td className="px-4 py-4 text-sm">
+                                                    Pending
+                                                </td>
+                                                <td className="px-4 py-4 text-sm">
+                                                    <Link to={`/dashboard/updateProduct/${product._id}`}>
+                                                        <button className="btn btn-sm bg-green-200">Update <FaEdit></FaEdit></button>
+                                                    </Link>
+                                                </td>
+                                                <td className="px-4 py-4 text-sm">
+                                                    <button
+                                                        onClick={() => handleDeleteProduct(product._id)}
+                                                        className="btn btn-sm bg-error text-white">Delete <FaTrash></FaTrash></button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            :
-            <div>
-                <p className="">No product add yet</p>
-            </div>
+                    :
+                    <div>
+                        <p className="">No product add yet</p>
+                    </div>
             }
         </div>
     );

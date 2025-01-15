@@ -12,6 +12,7 @@ import Dashboard from "../MainLayOut/Dashboard";
 import MyProfile from "../Dashboard/MyProfile/MyProfile";
 import AddProduct from "../Dashboard/AddProduct/AddProduct";
 import MyAddedProduct from "../Dashboard/MyAddedProduct/MyAddedProduct";
+import UpdateProduct from "../Dashboard/MyAddedProduct/UpdateProduct";
 
  const router = createBrowserRouter([
     {
@@ -59,6 +60,11 @@ import MyAddedProduct from "../Dashboard/MyAddedProduct/MyAddedProduct";
             {
                 path: 'my-product',
                 element: <MyAddedProduct></MyAddedProduct>
+            },
+            {
+                path: 'updateProduct/:id',
+                element: <UpdateProduct></UpdateProduct>,
+                loader: ({params}) => fetch(`http://localhost:5000/updateProduct/${params.id}`)
             },
         ]
     },

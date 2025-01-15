@@ -3,11 +3,15 @@ import { WithContext as ReactTags } from "react-tag-input";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const AddProduct = () => {
     const { user } = useAuth();
     const [tags, setTags] = useState([]);
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     // ReactTag Handlers
     const handleDelete = (index) => {
@@ -41,7 +45,8 @@ const AddProduct = () => {
             productOwnerPhoto: user?.photoURL,
             productDescription: description,
             productTags: tags.map((tag) => tag.text),
-            productLink: link
+            productLink: link,
+            timestamp: new Date().toISOString(),
         }
 
         // console.log(addProduct)
@@ -56,6 +61,7 @@ const AddProduct = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            navigate('/dashboard/my-product')
         }
     }
 
