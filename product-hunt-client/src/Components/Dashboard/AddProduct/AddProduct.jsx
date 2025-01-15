@@ -1,29 +1,32 @@
 import React, { useState } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
     const { user } = useAuth();
-       // State for tags
-       const [tags, setTags] = useState([]);
+    const [tags, setTags] = useState([]);
+    const axiosPublic = useAxiosPublic();
 
-       // ReactTag Handlers
-       const handleDelete = (index) => {
-           setTags(tags.filter((_, i) => i !== index));
-       };
-   
-       const handleAddition = (tag) => {
-           setTags([...tags, tag]);
-       };
-   
-       const handleDrag = (tag, currPos, newPos) => {
-           const newTags = tags.slice();
-           newTags.splice(currPos, 1);
-           newTags.splice(newPos, 0, tag);
-           setTags(newTags);
-       };
+    // ReactTag Handlers
+    const handleDelete = (index) => {
+        setTags(tags.filter((_, i) => i !== index));
+    };
 
-    const handleAddProduct = e => {
+    const handleAddition = (tag) => {
+        setTags([...tags, tag]);
+    };
+
+    const handleDrag = (tag, currPos, newPos) => {
+        const newTags = tags.slice();
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+        setTags(newTags);
+    };
+
+    
+    const handleAddProduct = async (e) => {
         e.preventDefault();
         const form = e.target
         const name = form.name.value
@@ -41,7 +44,19 @@ const AddProduct = () => {
             productLink: link
         }
 
-        console.log(addProduct)
+        // console.log(addProduct)
+        // send data to database
+        const res = await axiosPublic.post('/add-product', addProduct)
+        console.log(res.data);
+        if(res.data.insertedId){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Your product is added",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     }
 
     return (
@@ -68,7 +83,7 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text font-bold">Product Description</span>
                         </label>
-                        <textarea name="description" className="textarea textarea-bordered" placeholder="Bio"></textarea>
+                        <textarea name="description" className="textarea textarea-bordered" placeholder="Description"></textarea>
                     </div>
                     <div className="form-control">
                         <label className="label">
@@ -88,8 +103,8 @@ const AddProduct = () => {
                             handleDelete={handleDelete}
                             handleAddition={handleAddition}
                             handleDrag={handleDrag}
-                            delimiters={[188, 13]} // Comma and Enter key
-                            placeholder="Add new tag make sure you use , after every single tag"
+                            delimiters={[188, 13]}
+                            placeholder="Add new tag use Comma and Enter key after every single tag"
                             classNames={{
                                 tags: "tags-input",
                                 tagInputField: "input input-bordered w-full",
@@ -102,7 +117,7 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text font-bold">External Links</span>
                         </label>
-                        <input type="url" name="link" placeholder="Enter Product Name" className="input input-bordered" required />
+                        <input type="url" name="link" placeholder="Enter Product Link" className="input input-bordered" required />
                     </div>
                     <div className="form-control mt-6">
                         <button className="btn bg-green-400 hover:bg-black hover:text-white">Submit</button>

@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { ImProfile } from "react-icons/im";
-import { FaList, FaProductHunt } from "react-icons/fa";
+import { FaHome, FaList, FaProductHunt } from "react-icons/fa";
 
 const Dashboard = () => {
     return (
@@ -23,6 +23,15 @@ const Dashboard = () => {
                         <NavLink to="/dashboard/my-product">
                             <FaProductHunt></FaProductHunt>
                             My Product
+                        </NavLink>
+                    </li>
+                </ul>
+                <div className="divider"></div>
+                <ul className="menu">
+                    <li>
+                        <NavLink to="/">
+                            <FaHome></FaHome>
+                            Home
                         </NavLink>
                     </li>
                 </ul>

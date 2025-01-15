@@ -11,6 +11,7 @@ import ReviewForm from "../Pages/ReviewForm/ReviewForm";
 import Dashboard from "../MainLayOut/Dashboard";
 import MyProfile from "../Dashboard/MyProfile/MyProfile";
 import AddProduct from "../Dashboard/AddProduct/AddProduct";
+import MyAddedProduct from "../Dashboard/MyAddedProduct/MyAddedProduct";
 
  const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ import AddProduct from "../Dashboard/AddProduct/AddProduct";
             {
                 path: 'add-product',
                 element: <AddProduct></AddProduct>
+            },
+            {
+                path: 'my-product',
+                element: <MyAddedProduct></MyAddedProduct>
             },
         ]
     },
