@@ -50,18 +50,19 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <div className='flex gap-2'>
-                    <Link to='login'><button className='btn'>Login</button></Link>
-                    <Link to='register'><button className='btn'>Register</button></Link>
+                    {
+                        user && user?.email ? '' : <Link to='login'><button className='btn'>Login</button></Link>
+                    }
                 </div>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
                             {
                                 user && user?.email ? <img
-                                    alt="Tailwind CSS Navbar component"
+                                    alt="user"
                                     src={user.photoURL} referrerPolicy='no-referrer' /> :
                                     <img
-                                        alt="Tailwind CSS Navbar component"
+                                        alt="user"
                                         src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                             }
                         </div>
@@ -69,11 +70,18 @@ const Navbar = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                            </a>
-                        </li>
+                        {
+                            user && user?.email ?
+                                <li>
+                                    <a
+                                        className="justify-between pointer-events-none cursor-default"
+                                        onClick={(e) => e.preventDefault()}
+                                    >
+                                        {user.displayName}
+                                    </a>
+                                </li>
+                                : ''
+                        }
                         <li><a>Dashboard</a></li>
                         <li onClick={Logout} ><a>Logout</a></li>
                     </ul>

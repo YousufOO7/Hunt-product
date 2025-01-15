@@ -1,16 +1,35 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import GoogleLogin from "../Components/Shared/GoogleLogin/GoogleLogin";
+import useAuth from "../Hooks/useAuth";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 const Login = () => {
+    const { signIn, setUser } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [error, setError] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = e => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value
-
-        console.log(email, password)
+         console.log(email, password);
+        // firebase
+        signIn(email, password)
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                navigate(location?.state ? location?.state : '/')
+                // toast.success(`Welcome ${user?.displayName}`);
+            })
+            .catch((err) => {
+                setError({ login: err.message });
+                // toast.error('Something went wrong. Please check your credentials.');
+            });
     }
 
     return (
@@ -23,11 +42,27 @@ const Login = () => {
                         </label>
                         <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                     </div>
-                    <div className="form-control">
+                    <div className="form-control relative">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            name="password"
+                            placeholder="password"
+                            className="input input-bordered"
+                            required
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="btn btn-xs absolute right-4 top-12"
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                        {error.login && (
+                            <label className="label text-red-500 text-xs">{error.login}</label>
+                        )}
                     </div>
                     <div className="form-control mt-6">
                         <button className="btn bg-green-400  hover:bg-black hover:text-white">Login</button>
