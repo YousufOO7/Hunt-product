@@ -28,7 +28,7 @@ const ProductDetails = () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: `Thank you for your vote if this ${name}`,
+                    title: `Thank you for your vote of this ${name}`,
                     showConfirmButton: false,
                     timer: 1500
                 });

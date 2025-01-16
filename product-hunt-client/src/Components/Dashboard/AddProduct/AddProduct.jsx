@@ -51,7 +51,7 @@ const AddProduct = () => {
             productLink: link,
             timestamp: new Date().toISOString(),
             status: 'Pending',
-            upvoteCount: 0
+            upvoteCount: Number(0)
         }
 
         console.log(addProduct)

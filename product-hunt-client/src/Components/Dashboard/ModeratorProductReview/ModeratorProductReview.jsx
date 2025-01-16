@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { use } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -19,9 +19,9 @@ const ModeratorProductReview = () => {
     })
 
     // sert all product by status
-    const sortedAllProduct = [...allProduct].sort((a,b) => {
-        if(a.status === 'Pending') return -1;
-        if(b.status === 'Pending') return 1;
+    const sortedAllProduct = [...allProduct].sort((a, b) => {
+        if (a.status === 'Pending') return -1;
+        if (b.status === 'Pending') return 1;
         return 0;
     })
 
@@ -30,7 +30,7 @@ const ModeratorProductReview = () => {
     const handleStatusChange = async (id, preStatus, status) => {
         console.log(id, preStatus, status);
         try {
-            const res = await axiosSecure.patch(`/update-status/${id}`, {status})
+            const res = await axiosSecure.patch(`/update-status/${id}`, { status })
             console.log(res.data)
             if (res.data.modifiedCount > 0) {
                 Swal.fire({
@@ -107,14 +107,34 @@ const ModeratorProductReview = () => {
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
 
-                                                    <button
-                                                        onClick={() => handleStatusChange(product._id, product.status, "Accepted")}
-                                                        className="btn btn-sm bg-green-200">Accept <FcApproval></FcApproval></button>
+                                                    {product.status === 'Accepted' || product.status === 'Rejected' ? <button
+                                                        // onClick={() => handleStatusChange(product._id, product.status, "Accepted")}
+                                                        disabled
+                                                        className="btn btn-sm bg-green-200"
+                                                    // disabled={disable[product._id]}
+                                                    >Accept <FcApproval></FcApproval></button>
+                                                        :
+                                                        <button
+                                                            onClick={() => handleStatusChange(product._id, product.status, "Accepted")}
+                                                            className="btn btn-sm bg-green-200"
+                                                        // disabled={disable[product._id]}
+                                                        >Accept <FcApproval></FcApproval></button>
+                                                    }
                                                 </td>
+                                                {/* Rejected btn */}
                                                 <td className="px-4 py-4 text-sm">
-                                                    <button
-                                                        onClick={() => handleStatusChange(product._id, product.status, "Rejected")}
-                                                        className="btn btn-sm bg-error text-white">Reject <FcCancel></FcCancel></button>
+                                                    {
+                                                        product.status === 'Accepted' || product.status === 'Rejected' ?
+                                                            <button
+                                                                disabled
+                                                                className="btn btn-sm bg-error text-white"
+                                                            >Reject <FcCancel></FcCancel></button>
+                                                            :
+                                                            <button
+                                                                onClick={() => handleStatusChange(product._id, product.status, "Rejected")}
+                                                                className="btn btn-sm bg-error text-white"
+                                                            >Reject <FcCancel></FcCancel></button>
+                                                    }
                                                 </td>
                                             </tr>
                                         ))}
