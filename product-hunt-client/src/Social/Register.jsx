@@ -4,6 +4,7 @@ import axios from "axios";
 import useAuth from "../Hooks/useAuth";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from "react";
+import { imageUpload } from "../Apis/Utilis";
 
 
 const Register = () => {
@@ -19,8 +20,8 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const image = form.image.files[0]
-        const formData = new FormData();
-        formData.append('image', image)
+        // const formData = new FormData();
+        // formData.append('image', image)
         setError('');
 
         if (password.length < 6) {
@@ -38,16 +39,16 @@ const Register = () => {
         }
 
         // send to image data to imgBB
-        const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData)
-        const imageUrl = data.data.display_url
-        console.log(imageUrl)
+        // const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData)
+        // const imageUrl = data.data.display_url
+        const photo = await imageUpload(image);
 
        
         try {
             console.log(email, password);
             const result = await createNewUser(email, password);
 
-            await updateUserProfile({ displayName: name, photoURL: imageUrl })
+            await updateUserProfile({ displayName: name, photoURL: photo })
 
             console.log(result);
             navigate('/')

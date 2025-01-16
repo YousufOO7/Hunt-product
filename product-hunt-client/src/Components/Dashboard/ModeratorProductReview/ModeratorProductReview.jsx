@@ -1,51 +1,28 @@
-import { FaEdit, FaTrash } from "react-icons/fa";
-import useAddProduct from "../../../Hooks/useAddProduct";
-import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { Link } from "react-router-dom";
+import React from 'react';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { use } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
+const ModeratorProductReview = () => {
+    const axiosSecure = useAxiosSecure();
 
-const MyAddedProduct = () => {
-    const [addedProduct, refetch] = useAddProduct();
-    const axiosPublic = useAxiosPublic();
-
-    // handle delete the added product
-    const handleDeleteProduct = (id) => {
-        // console.log(id);
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                // delete from the database
-                const res = await axiosPublic.delete(`/add-product/${id}`)
-                console.log(res.data);
-                refetch()
-                if (res.data.modifiedCount > 0) {
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                    refetch();
-                }
-            }
-        });
-    }
-
+    const { data: allProduct = [] } = useQuery({
+        queryKey: ['all-product'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/all-product')
+            return res.data
+        }
+    })
     return (
         <div>
-            <div>
-                <h2 className="md:text-4xl text-center font-bold my-5">My Added Products: {addedProduct.length}</h2>
+            <div className='text-center text-4xl font-bold my-5'>
+                All The Product Review Queue: {allProduct.length}
             </div>
 
             {
-                addedProduct.length > 0 ? <div className="flex flex-col mt-6 pb-5">
+                allProduct?.length > 0 ? <div className="flex flex-col mt-6 pb-5">
                     <div className="md:-mx-4 md:-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block  min-w-full py-2 align-middle md:px-6 lg:px-8">
                             <div className="overflow-hidden border  border-gray-200 md:rounded-lg">
@@ -58,10 +35,13 @@ const MyAddedProduct = () => {
                                             <th className="py-3.5 px-4 text-sm font-normal text-left">
                                                 Product Name
                                             </th>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left">
-                                                Number of Vote
-                                            </th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left">
+                                                View Details
+                                            </th>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left">
+                                                Featured
+                                            </th>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left">
                                                 Status
                                             </th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left">
@@ -73,7 +53,7 @@ const MyAddedProduct = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 ">
-                                        {addedProduct.map((product, idx) => (
+                                        {allProduct.map((product, idx) => (
                                             <tr key={product._id}>
                                                 <td className="px-4 py-4 ">
                                                     {idx + 1}
@@ -82,20 +62,24 @@ const MyAddedProduct = () => {
                                                     {product.productName}
                                                 </td>
                                                 <td className="px-4 py-4 text-sm ">
-                                                    {product.upvoteCount}
+                                                    <Link to={`/dashboard/product/${product._id}`}>
+                                                        <button className='btn btn-sm'>Details</button>
+                                                    </Link>
+                                                </td>
+                                                <td className="px-4 py-4 text-sm ">
+                                                    <button className='btn btn-sm'>Featured</button>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
                                                     {product.status}
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
-                                                    <Link to={`/dashboard/updateProduct/${product._id}`}>
-                                                        <button className="btn btn-sm bg-green-200">Update <FaEdit></FaEdit></button>
-                                                    </Link>
+
+                                                    <button className="btn btn-sm bg-green-200">Accept <FaEdit></FaEdit></button>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
                                                     <button
-                                                        onClick={() => handleDeleteProduct(product._id)}
-                                                        className="btn btn-sm bg-error text-white">Delete <FaTrash></FaTrash></button>
+                                                        // onClick={() => handleDeleteProduct(product._id)}
+                                                        className="btn btn-sm bg-error text-white">Reject <FaTrash></FaTrash></button>
                                                 </td>
                                             </tr>
                                         ))}
@@ -105,13 +89,11 @@ const MyAddedProduct = () => {
                         </div>
                     </div>
                 </div>
-                    :
-                    <div>
-                        <p className="">No product add yet</p>
-                    </div>
+                    : <><p>There is no more review product</p></>
             }
+
         </div>
     );
 };
 
-export default MyAddedProduct;
+export default ModeratorProductReview;

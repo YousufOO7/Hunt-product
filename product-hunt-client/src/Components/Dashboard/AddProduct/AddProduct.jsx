@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { imageUpload } from "../../../Apis/Utilis";
 
 const AddProduct = () => {
     const { user } = useAuth();
@@ -34,12 +35,14 @@ const AddProduct = () => {
         e.preventDefault();
         const form = e.target
         const name = form.name.value
-        const photo = form.photo.value;
+        const photo = form.photo.files[0]
         const description = form.description.value;
         const link = form.link.value;
+
+        const image = await imageUpload(photo)
         const addProduct = {
             productName: name,
-            productImage: photo,
+            productImage: image,
             productOwnerName: user?.displayName,
             productOwnerEmail: user?.email,
             productOwnerPhoto: user?.photoURL,
@@ -47,9 +50,11 @@ const AddProduct = () => {
             productTags: tags.map((tag) => tag.text),
             productLink: link,
             timestamp: new Date().toISOString(),
+            status: 'Pending',
+            upvoteCount: 0
         }
 
-        // console.log(addProduct)
+        console.log(addProduct)
         // send data to database
         const res = await axiosPublic.post('/add-product', addProduct)
         console.log(res.data);
@@ -82,7 +87,7 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text font-bold">Product Image</span>
                         </label>
-                        <input type="ur" name="photo" placeholder="Enter Product Name" className="input input-bordered" required />
+                        <input type="file" name="photo" className="file-input w-full max-w-xs" />
                     </div>
                     {/* product Description */}
                     <div className="form-control">

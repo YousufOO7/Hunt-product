@@ -82,7 +82,7 @@ const Navbar = () => {
                                 </li>
                                 : ''
                         }
-                        <Link to="/dashboard/my-profile">
+                        <Link to="/dashboard">
                             <li><a>Dashboard</a></li>
                         </Link>
                         <li onClick={Logout} ><a>Logout</a></li>

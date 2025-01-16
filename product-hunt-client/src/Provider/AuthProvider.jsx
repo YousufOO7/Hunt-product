@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase_config";
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged,  signInWithEmailAndPassword,  signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import axios from "axios";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
@@ -9,6 +11,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState();
+    const axiosPublic = useAxiosPublic();
 
     // create new account
     const createNewUser = (email, password) => {
@@ -34,22 +37,58 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     }
 
-     // update user profile
-     const updateUserProfile = (updateData) => {
+    // update user profile
+    const updateUserProfile = (updateData) => {
         return updateProfile(auth.currentUser, updateData);
     }
 
     // observer
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+        const unSubscribe = onAuthStateChanged(auth, async currentUser => {
             setUser(currentUser);
+            console.log('the user check', currentUser?.email)
+
+
+            if (currentUser) {
+                try {
+                    // Save user info to the db
+                    if (currentUser?.email) {
+                        await axios.post(`http://localhost:5000/users/${currentUser.email}`, {
+                            name: currentUser.displayName,
+                            image: currentUser.photoURL,
+                            email: currentUser.email,
+                        });
+                    }
+                    
+                    if(currentUser){
+                        const userInfo = {email: currentUser?.email}
+                        axiosPublic.post('/jwt', userInfo)
+                        .then(res => {
+                            if(res.data.token){
+                                localStorage.setItem('access-token', res.data.token)
+                                setLoading(false);
+                            }
+                        })
+                    }
+                   
+
+                } catch (error) {
+                    console.error('Error saving user info:', error.message);
+                }
+            }
+
+            else{
+                localStorage.removeItem('access-token')
+                setLoading(false);
+            }
+
             console.log(currentUser);
-            setLoading(false);
+            // setLoading(false);
         })
         return () => {
             unSubscribe();
         }
-    }, [])
+    }, [axiosPublic])
 
     const authInfo = {
         user,

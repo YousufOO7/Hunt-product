@@ -13,6 +13,8 @@ import MyProfile from "../Dashboard/MyProfile/MyProfile";
 import AddProduct from "../Dashboard/AddProduct/AddProduct";
 import MyAddedProduct from "../Dashboard/MyAddedProduct/MyAddedProduct";
 import UpdateProduct from "../Dashboard/MyAddedProduct/UpdateProduct";
+import ModeratorProductReview from "../Dashboard/ModeratorProductReview/ModeratorProductReview";
+import ProductDetailsByModerator from "../Dashboard/ModeratorProductReview/ProductDetailsByModerator";
 
  const router = createBrowserRouter([
     {
@@ -48,6 +50,16 @@ import UpdateProduct from "../Dashboard/MyAddedProduct/UpdateProduct";
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
         children: [
+            // moderator dashboard
+            {
+                path: 'product-review',
+                element: <ModeratorProductReview></ModeratorProductReview>
+            },
+            {
+                path: 'product/:id',
+                element: <ProductDetailsByModerator></ProductDetailsByModerator>,
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+            },
             // user dashboard
             {
                 path: 'my-profile',

@@ -12,10 +12,10 @@ const GoogleLogin = () => {
         .then(result => {
             const user = result.user
             navigate(location?.state ? location?.state : '/')
-            toast.success("SignIn Successful!!")
+            // toast.success("SignIn Successful!!")
         })
         .catch(error => {
-            toast.error("Something was wrong give valid info!!")
+            // toast.error("Something was wrong give valid info!!")
         })
     }
 

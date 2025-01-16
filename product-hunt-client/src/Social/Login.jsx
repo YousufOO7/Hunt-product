@@ -11,6 +11,8 @@ const Login = () => {
     const navigate = useNavigate();
     const [error, setError] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    
+    const from = location.state?.from?.pathname || '/'
 
     const handleSubmit =  (e) => {
         e.preventDefault();
@@ -23,7 +25,7 @@ const Login = () => {
             .then((result) => {
                 const user = result.user;
                 setUser(user);
-                navigate(location?.state ? location?.state : '/')
+                navigate(from, { replace: true });
                 // toast.success(`Welcome ${user?.displayName}`);
             })
             .catch((err) => {

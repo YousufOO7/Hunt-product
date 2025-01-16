@@ -63,7 +63,7 @@ const ProductDetails = () => {
                             <p className="py-6"><b>Description:</b> {description}</p>
                             <b>Tags:</b>
                             <div className='space-x-2'>
-                                {tags.map((tag, idx) => (
+                                {tags?.map((tag, idx) => (
                                     <span key={idx} className='badge badge-secondary'>
                                         {tag}
                                     </span>

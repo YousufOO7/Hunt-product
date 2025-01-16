@@ -59,12 +59,23 @@ const AllProductsCard = ({ product, refetch }) => {
                     ))}
                 </div>
                 <div className="card-actions justify-end">
-                    <button
-                        onClick={() => handleUpvoteCount(_id)}
-                        className="btn bg-green-400 text-lg mt-2"
-                    >
-                        <FaVoteYea /> {`Upvote (${upvoteCount})`}
-                    </button>
+                    {
+                        user && user?.email ? <button
+                            onClick={() => handleUpvoteCount(_id)}
+                            className="btn bg-green-400 text-lg mt-2"
+                        >
+                            <FaVoteYea /> {`Upvote (${upvoteCount})`}
+                        </button>
+                            :
+                            <Link to='/login'>
+                                <button
+                                    // onClick={() => handleUpvoteCount(_id)}
+                                    className="btn bg-green-400 text-lg mt-2"
+                                >
+                                    <FaVoteYea /> {`Upvote (${upvoteCount})`}
+                                </button>
+                            </Link>
+                    }
                 </div>
             </div>
         </div>
