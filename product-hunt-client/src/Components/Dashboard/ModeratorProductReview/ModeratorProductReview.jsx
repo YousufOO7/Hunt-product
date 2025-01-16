@@ -4,25 +4,58 @@ import { use } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FcApproval, FcCancel } from 'react-icons/fc';
+import Swal from 'sweetalert2';
 
 const ModeratorProductReview = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: allProduct = [] } = useQuery({
+    const { data: allProduct = [], refetch } = useQuery({
         queryKey: ['all-product'],
         queryFn: async () => {
             const res = await axiosSecure.get('/all-product')
             return res.data
         }
     })
+
+    // sert all product by status
+    const sortedAllProduct = [...allProduct].sort((a,b) => {
+        if(a.status === 'Pending') return -1;
+        if(b.status === 'Pending') return 1;
+        return 0;
+    })
+
+
+    // handle accept button
+    const handleStatusChange = async (id, preStatus, status) => {
+        console.log(id, preStatus, status);
+        try {
+            const res = await axiosSecure.patch(`/update-status/${id}`, {status})
+            console.log(res.data)
+            if (res.data.modifiedCount > 0) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Response is update",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                refetch();
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div>
             <div className='text-center text-4xl font-bold my-5'>
-                All The Product Review Queue: {allProduct.length}
+                All The Product Review Queue: {sortedAllProduct.length}
             </div>
 
             {
-                allProduct?.length > 0 ? <div className="flex flex-col mt-6 pb-5">
+                sortedAllProduct?.length > 0 ? <div className="flex flex-col mt-6 pb-5">
                     <div className="md:-mx-4 md:-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block  min-w-full py-2 align-middle md:px-6 lg:px-8">
                             <div className="overflow-hidden border  border-gray-200 md:rounded-lg">
@@ -53,7 +86,7 @@ const ModeratorProductReview = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 ">
-                                        {allProduct.map((product, idx) => (
+                                        {sortedAllProduct.map((product, idx) => (
                                             <tr key={product._id}>
                                                 <td className="px-4 py-4 ">
                                                     {idx + 1}
@@ -74,12 +107,14 @@ const ModeratorProductReview = () => {
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
 
-                                                    <button className="btn btn-sm bg-green-200">Accept <FaEdit></FaEdit></button>
+                                                    <button
+                                                        onClick={() => handleStatusChange(product._id, product.status, "Accepted")}
+                                                        className="btn btn-sm bg-green-200">Accept <FcApproval></FcApproval></button>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
                                                     <button
-                                                        // onClick={() => handleDeleteProduct(product._id)}
-                                                        className="btn btn-sm bg-error text-white">Reject <FaTrash></FaTrash></button>
+                                                        onClick={() => handleStatusChange(product._id, product.status, "Rejected")}
+                                                        className="btn btn-sm bg-error text-white">Reject <FcCancel></FcCancel></button>
                                                 </td>
                                             </tr>
                                         ))}

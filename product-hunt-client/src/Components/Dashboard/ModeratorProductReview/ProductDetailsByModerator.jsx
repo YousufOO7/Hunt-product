@@ -1,11 +1,10 @@
-import React from 'react';
 import { FaVoteYea } from 'react-icons/fa';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 const ProductDetailsByModerator = () => {
     const product = useLoaderData();
     console.log(product)
-    const {productImage: image, productDescription: description, productLink: externalLinks, productName: name, productTags: tags, status, upvoteCount, _id} = product || [];
+    const {productImage: image, productDescription: description, productLink: externalLinks, productName: name, productTags: tags, upvoteCount} = product || [];
     return (
         <div className='mt-20 bg-white rounded-lg py-5'>
             <div className="hero">

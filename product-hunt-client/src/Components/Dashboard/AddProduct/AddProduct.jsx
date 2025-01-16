@@ -87,7 +87,7 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text font-bold">Product Image</span>
                         </label>
-                        <input type="file" name="photo" className="file-input w-full max-w-xs" />
+                        <input type="file" name="photo" className="file-input w-full max-w-xs" required />
                     </div>
                     {/* product Description */}
                     <div className="form-control">
