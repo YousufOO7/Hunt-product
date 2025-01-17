@@ -48,6 +48,45 @@ const ModeratorProductReview = () => {
         }
     }
 
+    // handle feature button
+    const handleFeature = async (product) => {
+        const featureProduct = {
+            description: product.productDescription,
+            image: product.productImage,
+            externalLinks: product.productLink,
+            name: product.productName,
+            email: product.productOwnerEmail,
+            tags: product.productTags,
+            upvoteCount: product.upvoteCount,
+            postedTime: product.timestamp            
+        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to send is a feature section!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, make it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.post(`/add-feature/${product._id}`, featureProduct)
+                console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Product add to Feature",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
+
+            }
+        });
+    }
+
     return (
         <div>
             <div className='text-center text-4xl font-bold my-5'>
@@ -100,7 +139,16 @@ const ModeratorProductReview = () => {
                                                     </Link>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm ">
-                                                    <button className='btn btn-sm'>Featured</button>
+                                                    {
+                                                        product.status === 'Rejected' ?
+                                                            <button
+                                                                disabled
+                                                                className='btn btn-sm'>Featured</button>
+                                                            :
+                                                            <button
+                                                                onClick={() => handleFeature(product)}
+                                                                className='btn btn-sm'>Featured</button>
+                                                    }
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
                                                     {product.status}
