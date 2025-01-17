@@ -51,7 +51,7 @@ const ReportedProduct = () => {
                                                     {product.productName}
                                                 </td>
                                                 <td className="px-4 py-4 text-sm">
-                                                    <Link to={`/dashboard/product/${product._id}`}>
+                                                    <Link to={`/dashboard/product-report/${product._id}`}>
                                                         <button className="btn btn-sm bg-green-200">View Details <FaBook></FaBook></button>
                                                     </Link>
                                                 </td>
