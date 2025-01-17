@@ -4,8 +4,8 @@ import { useLoaderData } from "react-router-dom";
 
 const ReportProductDetails = () => {
     const reportProduct = useLoaderData();
-    console.log(reportProduct)
     const {productImage: image, productDescription: description, productLinks: externalLinks, productName: name, productTags: tags, productUpvoteCount: upvoteCount} = reportProduct || [];
+
 
     return (
         <div className='mt-20 bg-white rounded-lg py-5'>
