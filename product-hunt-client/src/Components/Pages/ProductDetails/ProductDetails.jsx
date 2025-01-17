@@ -47,6 +47,33 @@ const ProductDetails = () => {
         }
     };
 
+    const handleReport = async (product) => {
+        console.log(product);
+        const reportProduct = {
+            productName: product.name,
+            productImage: product.image,
+            productTags: product.tags,
+            productUpvoteCount: product.upvoteCount,
+            productDescription: product.description,
+            productLinks: product.externalLinks,
+            productId: product._id
+        }
+        try {
+            const res = await axiosPublic.post(`/report-product/${product._id}`, reportProduct)
+            console.log(res.data)
+            if (res.data.insertedId) {
+                Swal.fire({
+                    title: "Reported!",
+                    text: "Your report has been send!",
+                    icon: "success"
+                });
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="pt-20  bg-orange-50">
             <div className="max-w-6xl mx-auto py-10">
@@ -74,18 +101,20 @@ const ProductDetails = () => {
                             <div className="flex justify-around items-center mt-2">
                                 <button
                                     onClick={() => handleUpvoteCount(_id)}
-                                    className="btn bg-green-400 text-lg"
+                                    className="btn bg-green-400 "
                                 >
                                     <FaVoteYea /> {`Upvote (${upvoteCount})`}
                                 </button>
 
                                 {/* review button */}
                                 <Link to={`/review/${_id}`}>
-                                    <button className="btn bg-orange-400 text-lg">Give Review</button>
+                                    <button className="btn bg-orange-400 ">Give Review</button>
                                 </Link>
 
                                 {/* report button */}
-                                <button className="btn bg-red-400 text-lg">Report</button>
+                                <button
+                                    onClick={() => handleReport(product)}
+                                    className="btn bg-red-400 ">Report</button>
                             </div>
                         </div>
                     </div>

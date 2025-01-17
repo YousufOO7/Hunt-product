@@ -17,6 +17,7 @@ import ModeratorProductReview from "../Dashboard/ModeratorProductReview/Moderato
 import ProductDetailsByModerator from "../Dashboard/ModeratorProductReview/ProductDetailsByModerator";
 import ModeratorRoute from "./ModeratorRoute";
 import PrivateRoute from "./PrivateRoute";
+import ReportedProduct from "../Dashboard/ReportedProduct/ReportedProduct";
 
  const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ import PrivateRoute from "./PrivateRoute";
                 path: 'product/:id',
                 element: <ModeratorRoute><ProductDetailsByModerator></ProductDetailsByModerator></ModeratorRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+            },
+            {
+                path: 'reported-product',
+                element: <ModeratorRoute><ReportedProduct></ReportedProduct></ModeratorRoute>
             },
             // user dashboard
             {

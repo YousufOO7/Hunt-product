@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { ImProfile } from "react-icons/im";
-import { FaEdit, FaHome, FaList, FaProductHunt } from "react-icons/fa";
+import { FaBook, FaEdit, FaHome, FaList, FaProductHunt } from "react-icons/fa";
 import useModerator from "../../Hooks/useModerator";
 
 const Dashboard = () => {
@@ -16,6 +16,12 @@ const Dashboard = () => {
                                     <NavLink to="/dashboard/product-review">
                                         <FaEdit></FaEdit>
                                         Product Review Queue
+                                    </NavLink>
+                                </li>
+                                 <li>
+                                    <NavLink to="/dashboard/reported-product">
+                                        <FaBook></FaBook>
+                                        Reported Contents
                                     </NavLink>
                                 </li>
                                 </>

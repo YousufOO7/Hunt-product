@@ -3,7 +3,6 @@ import { useLoaderData } from 'react-router-dom';
 
 const ProductDetailsByModerator = () => {
     const product = useLoaderData();
-    console.log(product)
     const {productImage: image, productDescription: description, productLink: externalLinks, productName: name, productTags: tags, upvoteCount} = product || [];
     return (
         <div className='mt-20 bg-white rounded-lg py-5'>
