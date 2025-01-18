@@ -48,12 +48,12 @@ const ReviewForm = () => {
             <div className="max-w-6xl mx-auto">
                 <div className="hero">
                     <div className="hero-content flex-col-reverse md:flex-row lg:flex-row">
-                        <div className="text-center lg:text-left md:w-1/2">
+                        <div className="text-center lg:text-left ">
                             <p className="py-6">
                                 <img src={image} className="w-full h-[300px] rounded-md" alt="" />
                             </p>
                         </div>
-                        <div className="card bg-base-100 w-full shadow-2xl md:w-1/2">
+                        <div className="card bg-base-100 w-full shadow-2xl ">
                             <form onSubmit={handleGivenReview} className="card-body">
                                 <div className="form-control">
                                     <label className="label">

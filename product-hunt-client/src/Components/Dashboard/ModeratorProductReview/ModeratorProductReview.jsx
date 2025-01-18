@@ -58,7 +58,8 @@ const ModeratorProductReview = () => {
             email: product.productOwnerEmail,
             tags: product.productTags,
             upvoteCount: product.upvoteCount,
-            postedTime: product.timestamp            
+            postedTime: product.timestamp,
+            featuredId: product._id          
         }
         Swal.fire({
             title: "Are you sure?",
