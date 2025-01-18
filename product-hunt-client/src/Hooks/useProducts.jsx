@@ -32,7 +32,7 @@ const useProducts = (search) => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products', search], 
         queryFn:  async () => {
-            const { data } = await axiosPublic.get('/products', { params: { search } });
+            const { data } = await axiosPublic.get(`/products?page=${currentPage}&size=${itemPerPage}`, { params: { search } });
             return data;
         }
     }

@@ -21,6 +21,7 @@ import ReportedProduct from "../Dashboard/ReportedProduct/ReportedProduct";
 import ReportProductDetails from "../Dashboard/ReportedProduct/ReportProductDetails";
 import FeatureDetail from "../Pages/Feature/FeatureDetail";
 import FeatureReviewForm from "../Pages/Feature/FeatureReviewForm";
+import AllUsers from "../Dashboard/AllUsers/AllUsers";
 
  const router = createBrowserRouter([
     {
@@ -67,6 +68,13 @@ import FeatureReviewForm from "../Pages/Feature/FeatureReviewForm";
         path: "/dashboard",
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
+
+            // admin dashboard
+            {
+                path: 'manageUsers',
+                element: <AllUsers></AllUsers>,
+            },
+
             // moderator dashboard
             {
                 path: 'product-review',
