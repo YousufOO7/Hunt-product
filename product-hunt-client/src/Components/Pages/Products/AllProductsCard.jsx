@@ -49,20 +49,21 @@ const AllProductsCard = ({ product, refetch }) => {
             </figure>
             <div className="card-body">
                 <Link to={`/product/${_id}`}>
-                    <h2 className="card-title">{name}</h2>
+                    <h2 className="card-title hover:text-error"><b>Name:</b> {name}</h2>
                 </Link>
                 <div className='space-x-2'>
+                    <p className='font-bold'>Tags:</p>
                     {tags.map((tag, idx) => (
                         <span key={idx} className='badge badge-secondary'>
                             {tag}
                         </span>
                     ))}
                 </div>
-                <div className="card-actions justify-end">
+                <div className="card-actions">
                     {
                         user && user?.email ? <button
                             onClick={() => handleUpvoteCount(_id)}
-                            className="btn bg-green-400 text-lg mt-2"
+                            className="btn bg-green-400 text-lg mt-2 w-full"
                         >
                             <FaVoteYea /> {`Upvote (${upvoteCount})`}
                         </button>
@@ -70,7 +71,7 @@ const AllProductsCard = ({ product, refetch }) => {
                             <Link to='/login'>
                                 <button
                                     // onClick={() => handleUpvoteCount(_id)}
-                                    className="btn bg-green-400 text-lg mt-2"
+                                    className="btn bg-green-400 text-lg mt-2 w-full"
                                 >
                                     <FaVoteYea /> {`Upvote (${upvoteCount})`}
                                 </button>

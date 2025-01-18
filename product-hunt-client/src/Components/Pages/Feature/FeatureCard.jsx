@@ -45,15 +45,16 @@ const FeatureCard = ({ featureProduct, refetch }) => {
     };
 
     return (
-        <div className="card card-compact bg-base-100 w-96 shadow-xl">
+        <div className="card card-compact border bg-green-300 text-black">
             <figure>
                 <img
                     src={featureProduct.image}
+                    className="bg-cover w-full h-[200px]"
                     alt="Shoes" />
             </figure>
             <div className="card-body">
                 <Link to={`/feature-detail/${featureProduct._id}`}>
-                    <h2 className="card-title"><b>Name:</b> {featureProduct.name}</h2>
+                    <h2 className="lg:text-xl hover:text-green-600"><b>Name:</b> {featureProduct.name}</h2>
                 </Link>
                 <div className='space-x-2'>
                     <b>Tags:</b>

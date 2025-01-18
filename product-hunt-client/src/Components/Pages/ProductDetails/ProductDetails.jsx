@@ -47,6 +47,7 @@ const ProductDetails = () => {
         }
     };
 
+    // report a product
     const handleReport = async (product) => {
         console.log(product);
         const reportProduct = {
