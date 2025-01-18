@@ -34,7 +34,8 @@ import FeatureReviewForm from "../Pages/Feature/FeatureReviewForm";
             },
             {
                 path: "/products",
-                element: <Products></Products>
+                element: <Products></Products>,
+                loader: () => fetch('http://localhost:5000/product-count')
             },
             {
                 path: "/product/:id",
