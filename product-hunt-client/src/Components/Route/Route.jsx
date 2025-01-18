@@ -20,6 +20,7 @@ import PrivateRoute from "./PrivateRoute";
 import ReportedProduct from "../Dashboard/ReportedProduct/ReportedProduct";
 import ReportProductDetails from "../Dashboard/ReportedProduct/ReportProductDetails";
 import FeatureDetail from "../Pages/Feature/FeatureDetail";
+import FeatureReviewForm from "../Pages/Feature/FeatureReviewForm";
 
  const router = createBrowserRouter([
     {
@@ -37,7 +38,7 @@ import FeatureDetail from "../Pages/Feature/FeatureDetail";
             },
             {
                 path: "/product/:id",
-                element: <ProductDetails></ProductDetails>,
+                element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`)
             },
             {
@@ -49,6 +50,11 @@ import FeatureDetail from "../Pages/Feature/FeatureDetail";
                 path: "/review/:id",
                 element: <ReviewForm></ReviewForm>,
                 loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
+            },
+            {
+                path: "/feature/review/:id",
+                element: <FeatureReviewForm></FeatureReviewForm>,
+                loader: ({params}) => fetch(`http://localhost:5000/feature/review/${params.id}`)
             },
         ],
         

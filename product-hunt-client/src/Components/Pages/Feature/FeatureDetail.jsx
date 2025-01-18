@@ -104,7 +104,7 @@ const FeatureDetail = () => {
                                 </button>
 
                                 {/* review button */}
-                                <Link to={`/review/${_id}`}>
+                                <Link to={`/feature/review/${_id}`}>
                                     <button className="btn bg-orange-400 ">Give Review</button>
                                 </Link>
 
