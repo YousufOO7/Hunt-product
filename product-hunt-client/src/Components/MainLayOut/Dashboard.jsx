@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { ImProfile } from "react-icons/im";
 import { FaBook, FaEdit, FaHome, FaList, FaProductHunt, FaUsers } from "react-icons/fa";
+import { RiCoupon2Fill } from "react-icons/ri";
 import useModerator from "../../Hooks/useModerator";
 import useAdmin from "../../Hooks/useAdmin";
 
@@ -18,6 +19,12 @@ const Dashboard = () => {
                                 <NavLink to="/dashboard/manageUsers">
                                     <FaUsers></FaUsers>
                                     Manage Users
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageCoupon">
+                                    <RiCoupon2Fill></RiCoupon2Fill>
+                                    Manage Coupon
                                 </NavLink>
                             </li>
                         </>

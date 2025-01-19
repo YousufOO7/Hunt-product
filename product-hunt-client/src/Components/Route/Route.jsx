@@ -22,6 +22,8 @@ import ReportProductDetails from "../Dashboard/ReportedProduct/ReportProductDeta
 import FeatureDetail from "../Pages/Feature/FeatureDetail";
 import FeatureReviewForm from "../Pages/Feature/FeatureReviewForm";
 import AllUsers from "../Dashboard/AllUsers/AllUsers";
+import ManageCoupon from "../Dashboard/ManageCoupon/ManageCoupon";
+import AddCouponForm from "../Dashboard/ManageCoupon/AddCouponForm";
 
  const router = createBrowserRouter([
     {
@@ -73,6 +75,14 @@ import AllUsers from "../Dashboard/AllUsers/AllUsers";
             {
                 path: 'manageUsers',
                 element: <AllUsers></AllUsers>,
+            },
+            {
+                path: 'manageCoupon',
+                element: <ManageCoupon></ManageCoupon>,
+            },
+            {
+                path: 'add-coupon',
+                element: <AddCouponForm></AddCouponForm>,
             },
 
             // moderator dashboard
