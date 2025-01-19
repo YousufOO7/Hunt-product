@@ -42,9 +42,11 @@ const ManageCoupon = () => {
         });
     }
 
+
+
     return (
         <div>
-            <h2 className="md:text-4xl text-center font-bold my-5">Manage Coupon: {allCouponCard.length}</h2>
+            <h2 className="md:text-4xl text-center font-bold my-5">Manage Coupon</h2>
 
             <div className="flex justify-end my-5">
                 <Link to='/dashboard/add-coupon'><button className="btn btn-sm bg-green-300">Add Coupon</button></Link>
@@ -61,7 +63,12 @@ const ManageCoupon = () => {
                             <p className="text-xs"><b>Description:</b> {coupon.description}</p>
                             <p className="text-xs"><b>Amount:</b> ${coupon.amount}</p>
                             <div className="card-actions justify-between">
-                                <button className="btn btn-sm bg-green-300">Update</button>
+                                {/* update btn */}
+                                <Link to={`/dashboard/updateCoupon/${coupon._id}`}>
+                                    <button className="btn btn-sm bg-green-300">Update</button>
+                                </Link>
+
+                                {/* delete btn */}
                                 <button
                                     onClick={() => handleDeleteCoupon(coupon._id)}
                                     className="btn  btn-sm bg-error">Delete</button>

@@ -24,6 +24,7 @@ import FeatureReviewForm from "../Pages/Feature/FeatureReviewForm";
 import AllUsers from "../Dashboard/AllUsers/AllUsers";
 import ManageCoupon from "../Dashboard/ManageCoupon/ManageCoupon";
 import AddCouponForm from "../Dashboard/ManageCoupon/AddCouponForm";
+import UpdateCoupon from "../Dashboard/ManageCoupon/UpdateCoupon";
 
  const router = createBrowserRouter([
     {
@@ -83,6 +84,11 @@ import AddCouponForm from "../Dashboard/ManageCoupon/AddCouponForm";
             {
                 path: 'add-coupon',
                 element: <AddCouponForm></AddCouponForm>,
+            },
+            {
+                path: 'updateCoupon/:id',
+                element: <UpdateCoupon></UpdateCoupon>,
+                loader: ({params}) => fetch(`http://localhost:5000/updateCoupon/${params.id}`)
             },
 
             // moderator dashboard

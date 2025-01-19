@@ -48,7 +48,7 @@ const AddCouponForm = () => {
                             <span className="label-text font-bold">Expiry Date</span>
                         </label>
                         <DatePicker
-                            className='border p-2 rounded-md'
+                            className='border p-2 rounded-md w-full'
                             selected={startDate}
                             onChange={date => setStartDate(date)}
                             minDate={new Date()}
