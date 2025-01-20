@@ -6,7 +6,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 
 const FeatureCard = ({ featureProduct, refetch }) => {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const axiosPublic = useAxiosPublic();
     // console.log(featureProduct)
     const navigate = useNavigate();
@@ -53,9 +53,16 @@ const FeatureCard = ({ featureProduct, refetch }) => {
                     alt="Shoes" />
             </figure>
             <div className="card-body">
-                <Link to={`/feature-detail/${featureProduct._id}`}>
-                    <h2 className="lg:text-xl hover:text-green-600"><b>Name:</b> {featureProduct.name}</h2>
-                </Link>
+                {
+                    user && user?.email ?
+                        <Link to={`/feature-detail/${featureProduct._id}`}>
+                            <h2 className="lg:text-xl hover:text-green-600"><b>Name:</b> {featureProduct.name}</h2>
+                        </Link>
+                        :
+                        <Link to='/login'>
+                            <h2 className="lg:text-xl hover:text-green-600"><b>Name:</b> {featureProduct.name}</h2>
+                        </Link>
+                }
                 <div className='space-x-2'>
                     <b>Tags:</b>
                     {featureProduct.tags.map((tag, idx) => (
@@ -67,10 +74,10 @@ const FeatureCard = ({ featureProduct, refetch }) => {
                 <div className="card-actions ">
                     <button
                         onClick={() => {
-                            if(!user){
+                            if (!user) {
                                 navigate('/login')
                             }
-                            else{
+                            else {
                                 handleUpvoteCount(featureProduct._id)
                             }
                         }}

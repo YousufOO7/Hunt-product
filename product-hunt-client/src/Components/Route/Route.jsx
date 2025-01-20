@@ -25,6 +25,7 @@ import AllUsers from "../Dashboard/AllUsers/AllUsers";
 import ManageCoupon from "../Dashboard/ManageCoupon/ManageCoupon";
 import AddCouponForm from "../Dashboard/ManageCoupon/AddCouponForm";
 import UpdateCoupon from "../Dashboard/ManageCoupon/UpdateCoupon";
+import AdminRoute from "./AdminRoute";
 
  const router = createBrowserRouter([
     {
@@ -75,15 +76,15 @@ import UpdateCoupon from "../Dashboard/ManageCoupon/UpdateCoupon";
             // admin dashboard
             {
                 path: 'manageUsers',
-                element: <AllUsers></AllUsers>,
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
             },
             {
                 path: 'manageCoupon',
-                element: <ManageCoupon></ManageCoupon>,
+                element: <AdminRoute><ManageCoupon></ManageCoupon></AdminRoute>,
             },
             {
                 path: 'add-coupon',
-                element: <AddCouponForm></AddCouponForm>,
+                element: <AdminRoute><AddCouponForm></AddCouponForm></AdminRoute>,
             },
             {
                 path: 'updateCoupon/:id',

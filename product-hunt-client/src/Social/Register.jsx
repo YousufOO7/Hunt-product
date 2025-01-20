@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "../Components/Shared/GoogleLogin/GoogleLogin";
-import axios from "axios";
+// import axios from "axios";
 import useAuth from "../Hooks/useAuth";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from "react";
 import { imageUpload } from "../Apis/Utilis";
+import { toast } from "react-toastify";
 
 
 const Register = () => {
@@ -20,8 +21,6 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const image = form.image.files[0]
-        // const formData = new FormData();
-        // formData.append('image', image)
         setError('');
 
         if (password.length < 6) {
@@ -38,20 +37,17 @@ const Register = () => {
             return;
         }
 
-        // send to image data to imgBB
-        // const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData)
-        // const imageUrl = data.data.display_url
         const photo = await imageUpload(image);
 
        
         try {
-            console.log(email, password);
             const result = await createNewUser(email, password);
 
             await updateUserProfile({ displayName: name, photoURL: photo })
 
-            console.log(result);
+            // console.log(result);
             navigate('/')
+             toast.success(`Thank you ${user?.displayName} for register`);
         }
         catch {
             (error) => {
@@ -61,9 +57,10 @@ const Register = () => {
     }
 
     return (
-        <div className="flex justify-center py-5 bg-gray-400">
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="flex justify-center py-5 bg-pink-50">
+            <div className="card bg-base-100 w-full max-w-md border">
                 <form onSubmit={handleSubmit} className="card-body">
+                <h2 className="text-4xl font-bold text-center">Register</h2>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Name</span>

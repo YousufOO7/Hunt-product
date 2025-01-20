@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import AllProductsCard from "../Products/AllProductsCard";
+import useAuth from "../../../Hooks/useAuth";
+import { Link } from "react-router-dom";
 
 
 const TrendingProduct = () => {
     const axiosPublic = useAxiosPublic();
+    const { user } = useAuth();
 
     const { data: trendingProducts = [], refetch } = useQuery({
         queryKey: ['trending-products'],
@@ -23,6 +26,17 @@ const TrendingProduct = () => {
                     trendingProducts.map(product => <AllProductsCard refetch={refetch} key={product._id} product={product}></AllProductsCard>)
                 }
             </section>
+
+            <div className="flex justify-center my-5">
+                {
+                    user && user?.email ?
+                        <Link to='/products'>
+                            <button className="btn bg-green-400 btn-lg hover:bg-black hover:text-white">Show All Products</button>
+                        </Link>
+                        :
+                        <button className="btn bg-green-400 btn-lg hover:bg-black hover:text-white">Show All Products</button>
+                }
+            </div>
         </div>
     );
 };

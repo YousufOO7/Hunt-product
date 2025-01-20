@@ -2,9 +2,13 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import navLogo from '../../../../public/images/navLogo2.png'
 import useAuth from '../../../Hooks/useAuth';
+// import useAdmin from '../../../Hooks/useAdmin';
+// import useModerator from '../../../Hooks/useModerator';
 
 const Navbar = () => {
-    const { user, Logout } = useAuth();
+    const { user, Logout } = useAuth(); //my-profile
+    // const [isAdmin] = useAdmin(); //manageUsers
+    // const [isModerator] = useModerator(); //product-review
     const Links = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/products">Products</NavLink></li>
@@ -82,9 +86,9 @@ const Navbar = () => {
                                 </li>
                                 : ''
                         }
-                        <Link to="/dashboard">
+                        <NavLink to="/dashboard">
                             <li><a>Dashboard</a></li>
-                        </Link>
+                        </NavLink>
                         <li onClick={Logout} ><a>Logout</a></li>
                     </ul>
                 </div>

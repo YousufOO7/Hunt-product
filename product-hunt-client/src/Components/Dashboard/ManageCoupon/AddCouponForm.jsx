@@ -3,10 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddCouponForm = () => {
     const [startDate, setStartDate] = useState(new Date());
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     const handleCoupon = async (e) => {
         e.preventDefault();
@@ -27,6 +29,7 @@ const AddCouponForm = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            navigate('/dashboard/manageCoupon')
         }
     }
 
