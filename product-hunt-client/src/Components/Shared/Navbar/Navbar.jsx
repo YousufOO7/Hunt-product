@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import navLogo from '../../../../public/images/navLogo2.png'
+import avatar from '../../../../public/images/default-avatar.jpg'
 import useAuth from '../../../Hooks/useAuth';
 // import useAdmin from '../../../Hooks/useAdmin';
 // import useModerator from '../../../Hooks/useModerator';
@@ -67,7 +68,7 @@ const Navbar = () => {
                                     src={user.photoURL} referrerPolicy='no-referrer' /> :
                                     <img
                                         alt="user"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                        src={avatar} />
                             }
                         </div>
                     </div>
@@ -89,6 +90,17 @@ const Navbar = () => {
                         <NavLink to="/dashboard">
                             <li><a>Dashboard</a></li>
                         </NavLink>
+
+                            {/* {
+                                user && isAdmin && !isModerator &&  <NavLink to="/dashboard/manageUsers"><li><a>Dashboard</a></li></NavLink>
+                            }
+                            {
+                                user && !isAdmin && isModerator &&  <NavLink to="/dashboard/product-review"><li><a>Dashboard</a></li></NavLink>
+                            }
+                            {
+                                user && !isAdmin && !isModerator &&  <NavLink to="/dashboard/my-profile"><li><a>Dashboard</a></li></NavLink>
+                            } */}
+
                         <li onClick={Logout} ><a>Logout</a></li>
                     </ul>
                 </div>

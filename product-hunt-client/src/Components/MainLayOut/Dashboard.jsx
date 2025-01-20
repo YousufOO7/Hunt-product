@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { ImProfile } from "react-icons/im";
+import { MdPreview } from "react-icons/md";
 import { FaBook, FaEdit, FaHome, FaList, FaProductHunt, FaUsers } from "react-icons/fa";
 import { RiCoupon2Fill } from "react-icons/ri";
 import useModerator from "../../Hooks/useModerator";
@@ -15,6 +16,13 @@ const Dashboard = () => {
 
                     {
                         isAdmin ? <>
+
+                            <li>
+                                <NavLink to="/dashboard/statistic">
+                                    <MdPreview></MdPreview>
+                                    Statistics
+                                </NavLink>
+                            </li>
                             <li>
                                 <NavLink to="/dashboard/manageUsers">
                                     <FaUsers></FaUsers>

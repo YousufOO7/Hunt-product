@@ -27,6 +27,7 @@ import AddCouponForm from "../Dashboard/ManageCoupon/AddCouponForm";
 import UpdateCoupon from "../Dashboard/ManageCoupon/UpdateCoupon";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Dashboard/Payment/Payment";
+import Statistics from "../Dashboard/Statistics/Statistics";
 
  const router = createBrowserRouter([
     {
@@ -75,6 +76,10 @@ import Payment from "../Dashboard/Payment/Payment";
         children: [
 
             // admin dashboard
+            {
+                path: 'statistic',
+                element: <AdminRoute><Statistics></Statistics></AdminRoute>
+            },
             {
                 path: 'manageUsers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
