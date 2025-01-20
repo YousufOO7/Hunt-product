@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
+import { Link } from 'react-router-dom';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const MyProfile = () => {
     const { user } = useAuth();
     console.log(user);
+    const [isPaid, setIsPaid] = useState(false);
+    const axiosSecure = useAxiosSecure();
+
+    useEffect(() => {
+        if (user?.email) {
+            axiosSecure.get(`/payment-status/${user.email}`)
+                .then(res => {
+                    setIsPaid(res.data.isPaid)
+                })
+                .catch(err => console.log('error', err))
+        }
+    }, [axiosSecure, setIsPaid, isPaid])
+
     return (
         <div>
             <div className="hero bg-white mt-20 rounded-xl">
@@ -22,7 +37,17 @@ const MyProfile = () => {
                             <p className="">
                                 <b>Membership Subscribe :</b>
                             </p>
-                            <button className="btn bg-green-400  hover:bg-black hover:text-white">$149</button>
+                            {
+                                isPaid ? (
+                                    <button className="btn  cursor-not-allowed" disabled>
+                                        Verified ✅
+                                    </button>
+                                ) : (
+                                    <Link to='/dashboard/payment' state={{ price: 249 }}>
+                                        <button className="btn bg-green-400 hover:bg-black hover:text-white">$249</button>
+                                    </Link>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

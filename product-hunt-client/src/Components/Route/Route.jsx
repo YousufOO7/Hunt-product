@@ -26,6 +26,7 @@ import ManageCoupon from "../Dashboard/ManageCoupon/ManageCoupon";
 import AddCouponForm from "../Dashboard/ManageCoupon/AddCouponForm";
 import UpdateCoupon from "../Dashboard/ManageCoupon/UpdateCoupon";
 import AdminRoute from "./AdminRoute";
+import Payment from "../Dashboard/Payment/Payment";
 
  const router = createBrowserRouter([
     {
@@ -123,6 +124,10 @@ import AdminRoute from "./AdminRoute";
             {
                 path: 'my-product',
                 element: <MyAddedProduct></MyAddedProduct>
+            },
+            {
+                path: 'payment',
+                element: <Payment></Payment>
             },
             {
                 path: 'updateProduct/:id',
