@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { Cell,  PieChart, Pie, Legend } from 'recharts';
+import { Cell, PieChart, Pie, Legend } from 'recharts';
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const Statistics = () => {
@@ -53,11 +53,31 @@ const Statistics = () => {
         return { name: data.name, value: data.value }
     })
 
- 
+
 
 
     return (
         <div>
+
+            <div className="flex justify-center my-5">
+            <div className="stats shadow">
+                <div className="stat place-items-center">
+                    <div className="stat-title">Total User</div>
+                    <div className="stat-value">{AllUsers.length}</div>
+                </div>
+
+                <div className="stat place-items-center">
+                    <div className="stat-title">Reviews</div>
+                    <div className="stat-value text-secondary">{AllReviews.length}</div>
+                </div>
+
+                <div className="stat place-items-center">
+                    <div className="stat-title">Total Products</div>
+                    <div className="stat-value">{AllProducts.total}</div>
+                </div>
+            </div>
+            </div>
+
             <section className="flex justify-center">
                 <div>
                     <PieChart width={400} height={400}>

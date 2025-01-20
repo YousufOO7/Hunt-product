@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
                 try {
                     // Save user info to the db
                     if (currentUser?.email) {
-                        await axios.post(`http://localhost:5000/users/${currentUser.email}`, {
+                        await axios.post(`https://product-hunt-server-theta.vercel.app/users/${currentUser.email}`, {
                             name: currentUser.displayName,
                             image: currentUser.photoURL,
                             email: currentUser.email,

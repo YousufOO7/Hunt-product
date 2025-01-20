@@ -92,13 +92,13 @@ const Navbar = () => {
                         </NavLink>
 
                             {/* {
-                                user && isAdmin && !isModerator &&  <NavLink to="/dashboard/manageUsers"><li><a>Dashboard</a></li></NavLink>
+                                user && isAdmin &&  <NavLink to="/dashboard/statistic"><li><span>Dashboard</span></li></NavLink>
                             }
                             {
-                                user && !isAdmin && isModerator &&  <NavLink to="/dashboard/product-review"><li><a>Dashboard</a></li></NavLink>
+                                user && !isAdmin && isModerator &&  <NavLink to="/dashboard/product-review"><li><span>Dashboard</span></li></NavLink>
                             }
                             {
-                                user && !isAdmin && !isModerator &&  <NavLink to="/dashboard/my-profile"><li><a>Dashboard</a></li></NavLink>
+                                user && !isAdmin && !isModerator &&  <NavLink to="/dashboard/my-profile"><li><span>Dashboard</span></li></NavLink>
                             } */}
 
                         <li onClick={Logout} ><a>Logout</a></li>

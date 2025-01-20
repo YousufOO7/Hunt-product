@@ -33,7 +33,9 @@ import Statistics from "../Dashboard/Statistics/Statistics";
     {
         path: "/",
         element: <MainLayOut></MainLayOut>,
-        errorElement: <h2>This is error page</h2>,
+        errorElement: <div className=' justify-center mt-52'>
+        <p className="text-4xl font-bold flex justify-center mt-52">Oooppppss Error: 404 page is not Found</p>
+        </div>,
         children: [
             {
                 path: "/",
@@ -42,27 +44,27 @@ import Statistics from "../Dashboard/Statistics/Statistics";
             {
                 path: "/products",
                 element: <Products></Products>,
-                loader: () => fetch('http://localhost:5000/product-count')
+                loader: () => fetch('https://product-hunt-server-theta.vercel.app/product-count')
             },
             {
                 path: "/product/:id",
                 element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/product/${params.id}`)
             },
             {
                 path: "/feature-detail/:id",
                 element: <FeatureDetail></FeatureDetail>,
-                loader: ({params}) => fetch(`http://localhost:5000/feature-detail/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/feature-detail/${params.id}`)
             },
             {
                 path: "/review/:id",
                 element: <ReviewForm></ReviewForm>,
-                loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/review/${params.id}`)
             },
             {
                 path: "/feature/review/:id",
                 element: <FeatureReviewForm></FeatureReviewForm>,
-                loader: ({params}) => fetch(`http://localhost:5000/feature/review/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/feature/review/${params.id}`)
             },
         ],
         
@@ -73,6 +75,9 @@ import Statistics from "../Dashboard/Statistics/Statistics";
     {
         path: "/dashboard",
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        errorElement: <div className=' justify-center mt-52'>
+        <p className="text-4xl font-bold flex justify-center mt-52">Oooppppss Error: 404 page is not Found</p>
+        </div>,
         children: [
 
             // admin dashboard
@@ -95,7 +100,7 @@ import Statistics from "../Dashboard/Statistics/Statistics";
             {
                 path: 'updateCoupon/:id',
                 element: <UpdateCoupon></UpdateCoupon>,
-                loader: ({params}) => fetch(`http://localhost:5000/updateCoupon/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/updateCoupon/${params.id}`)
             },
 
             // moderator dashboard
@@ -106,7 +111,7 @@ import Statistics from "../Dashboard/Statistics/Statistics";
             {
                 path: 'product/:id',
                 element: <ModeratorRoute><ProductDetailsByModerator></ProductDetailsByModerator></ModeratorRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/products/${params.id}`)
             },
             {
                 path: 'reported-product',
@@ -115,7 +120,7 @@ import Statistics from "../Dashboard/Statistics/Statistics";
             {
                 path: 'product-report/:id',
                 element: <ModeratorRoute><ReportProductDetails></ReportProductDetails></ModeratorRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/product-reported/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/product-reported/${params.id}`)
             },
             // user dashboard
             {
@@ -137,7 +142,7 @@ import Statistics from "../Dashboard/Statistics/Statistics";
             {
                 path: 'updateProduct/:id',
                 element: <UpdateProduct></UpdateProduct>,
-                loader: ({params}) => fetch(`http://localhost:5000/updateProduct/${params.id}`)
+                loader: ({params}) => fetch(`https://product-hunt-server-theta.vercel.app/updateProduct/${params.id}`)
             },
         ]
     },
