@@ -35,7 +35,7 @@ const Products = () => {
 
     const handleItemPerPage = e => {
         const val = parseInt(e.target.value);
-        console.log(val);
+        // console.log(val);
         setItemPerPage(val);
         setCurrentPage(0)
     }

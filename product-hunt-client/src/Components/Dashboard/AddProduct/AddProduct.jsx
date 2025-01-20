@@ -54,10 +54,10 @@ const AddProduct = () => {
             upvoteCount: Number(0)
         }
 
-        console.log(addProduct)
+        // console.log(addProduct)
         // send data to database
         const res = await axiosPublic.post('/add-product', addProduct)
-        console.log(res.data);
+        // console.log(res.data);
         if(res.data.insertedId){
             Swal.fire({
                 position: "center",

@@ -24,7 +24,7 @@ const MyAddedProduct = () => {
             if (result.isConfirmed) {
                 // delete from the database
                 const res = await axiosPublic.delete(`/add-product/${id}`)
-                console.log(res.data);
+                // console.log(res.data);
                 refetch()
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({

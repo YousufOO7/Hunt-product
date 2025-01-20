@@ -36,7 +36,7 @@ const FeatureReviewForm = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
-            console.log(res.data);
+            // console.log(res.data);
         } else {
             console.log("Error adding review. Please try again later.");
         }

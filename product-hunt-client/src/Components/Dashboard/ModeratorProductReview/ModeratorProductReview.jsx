@@ -28,10 +28,10 @@ const ModeratorProductReview = () => {
 
     // handle accept button
     const handleStatusChange = async (id, preStatus, status) => {
-        console.log(id, preStatus, status);
+        // console.log(id, preStatus, status);
         try {
             const res = await axiosSecure.patch(`/update-status/${id}`, { status })
-            console.log(res.data)
+            // console.log(res.data)
             if (res.data.modifiedCount > 0) {
                 Swal.fire({
                     position: "center",
@@ -72,7 +72,7 @@ const ModeratorProductReview = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.post(`/add-feature/${product._id}`, featureProduct)
-                console.log(res.data)
+                // console.log(res.data)
                 if (res.data.insertedId) {
                     Swal.fire({
                         position: "center",

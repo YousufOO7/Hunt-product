@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, async currentUser => {
             setUser(currentUser);
-            console.log('the user check', currentUser?.email)
+            // console.log('the user check', currentUser?.email)
 
 
             if (currentUser) {
@@ -82,7 +82,7 @@ const AuthProvider = ({ children }) => {
                 setLoading(false);
             }
 
-            console.log(currentUser);
+            // console.log(currentUser);
             // setLoading(false);
         })
         return () => {

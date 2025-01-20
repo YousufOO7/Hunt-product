@@ -22,7 +22,7 @@ const UpdateCoupon = () => {
             amount: parseInt(form.discountAmount.value)
         }
 
-        console.log(updateData);
+        // console.log(updateData);
         try {
             const res = await axiosSecure.patch(`/updateCoupon/${couponData._id}`, updateData)
             if (res.data.modifiedCount > 0) {

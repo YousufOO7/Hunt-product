@@ -49,7 +49,7 @@ const ProductDetails = () => {
 
     // report a product
     const handleReport = async (product) => {
-        console.log(product);
+        // console.log(product);
         const reportProduct = {
             productName: product.name,
             productImage: product.image,
@@ -61,7 +61,7 @@ const ProductDetails = () => {
         }
         try {
             const res = await axiosPublic.post(`/report-product/${product._id}`, reportProduct)
-            console.log(res.data)
+            // console.log(res.data)
             if (res.data.insertedId) {
                 Swal.fire({
                     title: "Reported!",
