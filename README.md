@@ -1,11 +1,11 @@
 <h1>Name: Trend Tracker</h1>
 <h2>Live Link: https://product-hut-8c417.web.app/</h2>
 
-<h3>Description: TrendTracker is a dynamic product discovery and review platform where users can add, review, and upvote products. The platform offers a structured moderation system, allowing moderators to review user-submitted products, remove inappropriate listings, and feature outstanding products.
+<p>Description: TrendTracker is a dynamic product discovery and review platform where users can add, review, and upvote products. The platform offers a structured moderation system, allowing moderators to review user-submitted products, remove inappropriate listings, and feature outstanding products.
 
 The admin panel provides insightful analytics, including user activity and payment tracking. Admins can also manage user roles by promoting users to moderators or admins, while users can request to become moderators.
 
-With an intuitive interface, tag-based filtering, and a vibrant community, TrendTracker makes product discovery more engaging and interactive.</h3>
+With an intuitive interface, tag-based filtering, and a vibrant community, TrendTracker makes product discovery more engaging and interactive.</p>
 
 <h3>How to use manually</h3>
 <ul>
